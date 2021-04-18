@@ -4,6 +4,9 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+// requirement from react-native-splash-screen
+#import "RNSplashScreen.h" 
+
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -11,6 +14,12 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+
+// 3 lines below is to remove yelow box warning :
+// RCTBridge required dispatch_sync to load RCTDevLoadingView. This may lead to deadlocks
+#if RCT_DEV
+#import <React/RCTDevLoadingView.h>
+#endif
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -32,6 +41,13 @@ static void InitializeFlipper(UIApplication *application) {
 #endif
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+
+  // 3 lines below is to remove yelow box warning :
+  // RCTBridge required dispatch_sync to load RCTDevLoadingView. This may lead to deadlocks
+  #if RCT_DEV
+    [bridge moduleForClass:[RCTDevLoadingView class]];
+  #endif
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"ids_task_manager_app"
                                             initialProperties:nil];
@@ -47,6 +63,10 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  // requirement from react-native-splash-screen
+  [RNSplashScreen show];
+  
   return YES;
 }
 
