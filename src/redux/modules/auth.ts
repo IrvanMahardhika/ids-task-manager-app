@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import axios from '@supports/api';
-// import {encrypt} from '@supports/helpers/encryption';
+import {encrypt} from '@supports/helpers/encryption';
 import {AppDispatch} from '../create';
 import {startLoading, stopLoading} from './loading';
 
@@ -43,13 +43,12 @@ type SignInData = {
 export const signIn = (data: SignInData) => async (dispatch: AppDispatch) => {
   try {
     dispatch(startLoading());
-    // const {email, password} = data;
-    // const encriptedPassword = encrypt(password);
+    const {email, password} = data;
+    const encriptedPassword = encrypt(password);
     const signInResult = await axios.get('user/login', {
       params: {
-        data,
-        // email,
-        // password: encriptedPassword,
+        email,
+        password: encriptedPassword,
       },
     });
     dispatch(login(signInResult.data));

@@ -14,4 +14,8 @@ module.exports = {
       },
     }),
   },
+  // requirement from 'node-libs-react-native
+  resolver: {
+    extraNodeModules: require('node-libs-react-native'),
+  },
 };

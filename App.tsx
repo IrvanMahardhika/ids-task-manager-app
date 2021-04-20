@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {PersistGate} from 'redux-persist/es/integration/react';
+import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
 
 import createStore from '@redux/create';
