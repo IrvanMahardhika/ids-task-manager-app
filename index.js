@@ -2,7 +2,7 @@
  * @format
  */
 
-// requirement from 'node-libs-react-native
+// requirement from 'node-libs-react-native'
 import 'node-libs-react-native/globals';
 
 import {AppRegistry} from 'react-native';
