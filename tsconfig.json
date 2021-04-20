@@ -42,6 +42,7 @@
     "paths": {
       "@assets/*": ["./assets/*"],
       "@components/*": ["./components/*"],
+      "@navigators/*": ["./navigators/*"],
       "@redux/*": ["./redux/*"],
       "@screens/*": ["./screens/*"],
       "@supports/*": ["./supports/*"]
